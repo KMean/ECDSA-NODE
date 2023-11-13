@@ -1,3 +1,22 @@
+## Alchemy University - Week 1 Project Overview
+
+The primary goal of this project is to familiarize ourselves with public key cryptography, specifically focusing on the process of digitally signing a message and having a server verify (recover your address) to confirm that the message has been authenticated by the corresponding private key.
+
+For this project, I utilized the ethereum-cryptography library (ethereum/js-ethereum-cryptography), as recommended in the course, to create some private and public key pairs for experimentation. Keep in mind that these keys are purely for mock purposes (NEVER EVER EXPOSE YOUR REAL PRIVATE KEYS ONLINE!!!). Here are some example key pairs you can use to experiment with:
+
+Private key 1: 1e4e707334cebca68580b6b8188c8a005308451286f35eda00dc4261c5c89514
+Public key 1: 024d555bb3df1ba565d5456e664fed385e097478bf9c49ddea68043df35d821a7c
+
+Private key 2: 9deb336de1c87465a16202fc7c3b1490bce10cfcdc389d6890d435c290d9af7e
+Public key 2: 02cfe73ebd8776af5381f1c64deab8ceb286e07dadf55108a389c83df0169eadf1
+
+Private key 3: a3dd1396b0cf26635990ac171cfed8b8af7e5ce1e5a0017259d3e8ccbe27d736
+Public key 3: 03c0ba6e6f07eecadb1ce5114ddea458309c6a4b49d0e9cca312b40b51908fe2e5
+
+Feel free to use these public-private pairs for testing.
+
+Instead of integrating a signature field into the Wallet or Transfer components, I decided to create a new Sign component. This component is triggered when a user clicks on "transfer", more closely simulating a real-world scenario. After the private key is used to sign the message, it is sent to the server, which then verifies the signature.
+
 ## ECDSA Node
 
 This project is an example of using a client and server to facilitate transfers between different addresses. Since there is just a single server on the back-end handling transfers, this is clearly very centralized. We won't worry about distributed consensus for this project.
