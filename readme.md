@@ -19,6 +19,7 @@ Public key 3: 03c0ba6e6f07eecadb1ce5114ddea458309c6a4b49d0e9cca312b40b51908fe2e5
 You can find them initialized with some balance in the balances Object in the server's index.js:
 
 // Sample balances using public keys as keys
+
 const balances = {
   "024d555bb3df1ba565d5456e664fed385e097478bf9c49ddea68043df35d821a7c": 100,
   "02cfe73ebd8776af5381f1c64deab8ceb286e07dadf55108a389c83df0169eadf1": 50,
