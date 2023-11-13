@@ -1,4 +1,4 @@
-## Alchemy University - Week 1 Project Overview
+## Alchemy University - My SOlution for Week 1 
 
 The primary goal of this project is to familiarize ourselves with public key cryptography, specifically focusing on the process of digitally signing a message and having a server verify (recover your address) to confirm that the message has been authenticated by the corresponding private key.
 
