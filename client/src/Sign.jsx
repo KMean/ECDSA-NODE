@@ -8,7 +8,7 @@ function Sign({ sender, amount, recipient, onSign }) {
   const [privateKey, setPrivateKey] = useState('');
 
   const handleSign = () => {
-    const message = `Transfer ${amount} to ${recipient}`;
+    const message = `Transfer ${amount} ETH from ${sender} to ${recipient}`;
     const messageHash = keccak256(utf8ToBytes(message));
     const signatureObject = secp256k1.sign(messageHash, privateKey);
 
@@ -19,8 +19,8 @@ function Sign({ sender, amount, recipient, onSign }) {
       recovery: signatureObject.recovery
     };
 
-    console.log("Signature:", signature);
-    console.log("Message:", message);
+    //console.log("Signature:", signature);
+    //console.log("Message:", message);
     onSign(signature, message);
   };
 
