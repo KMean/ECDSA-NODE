@@ -1,53 +1,69 @@
-import { useState } from "react";
+// Transfer.js
+import { useState } from 'react';
+import Sign from './Sign';
 import server from "./server";
 
 function Transfer({ address, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [isSigning, setIsSigning] = useState(false);
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
-  async function transfer(evt) {
-    evt.preventDefault();
+  const handleTransferClick = () => {
+    // Show the Sign component to sign the transaction
+    setIsSigning(true);
+  };
 
+  const handleSign = async (signature, message) => {
+    setIsSigning(false);
     try {
       const {
         data: { balance },
       } = await server.post(`send`, {
         sender: address,
-        amount: parseInt(sendAmount),
+        amount: parseInt(sendAmount, 10),
         recipient,
+        signature,
+        message
       });
       setBalance(balance);
     } catch (ex) {
-      alert(ex.response.data.message);
+      console.log(ex);
+      alert(ex.response?.data?.message || 'Error during transaction');
     }
-  }
+  };
 
   return (
-    <form className="container transfer" onSubmit={transfer}>
-      <h1>Send Transaction</h1>
+    <div>
+      {!isSigning ? (
+        <form className="container transfer" onSubmit={(e) => e.preventDefault()}>
+          <h1>Send Transaction</h1>
+          
+          <label>
+            Send Amount
+            <input
+              placeholder="1, 2, 3..."
+              value={sendAmount}
+              onChange={setValue(setSendAmount)}
+            />
+          </label>
 
-      <label>
-        Send Amount
-        <input
-          placeholder="1, 2, 3..."
-          value={sendAmount}
-          onChange={setValue(setSendAmount)}
-        ></input>
-      </label>
+          <label>
+            Recipient
+            <input
+              placeholder="Type an address..."
+              value={recipient}
+              onChange={setValue(setRecipient)}
+            />
+          </label>
 
-      <label>
-        Recipient
-        <input
-          placeholder="Type an address, for example: 0x2"
-          value={recipient}
-          onChange={setValue(setRecipient)}
-        ></input>
-      </label>
-
-      <input type="submit" className="button" value="Transfer" />
-    </form>
+          <button onClick={handleTransferClick} className="button">Transfer</button>
+        </form>
+      ) : (
+        <Sign sender={address} amount={sendAmount} recipient={recipient} onSign={handleSign} />
+      )}
+    </div>
   );
 }
 
