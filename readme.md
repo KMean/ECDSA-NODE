@@ -18,14 +18,14 @@ Public key 3: 03c0ba6e6f07eecadb1ce5114ddea458309c6a4b49d0e9cca312b40b51908fe2e5
 
 You can find them initialized with some balance in the balances Object in the server's index.js:
 
+```javascript
 // Sample balances using public keys as keys
-
 const balances = {
   "024d555bb3df1ba565d5456e664fed385e097478bf9c49ddea68043df35d821a7c": 100,
   "02cfe73ebd8776af5381f1c64deab8ceb286e07dadf55108a389c83df0169eadf1": 50,
   "03c0ba6e6f07eecadb1ce5114ddea458309c6a4b49d0e9cca312b40b51908fe2e5": 75,
 };
-
+```
 Feel free to use these public-private pairs for testing.
 
 Instead of integrating a signature field into the Wallet or Transfer components, I decided to create a new Sign component. This component is triggered when a user clicks on "transfer", more closely simulating a real-world scenario. After the private key is used to sign the message, it is sent to the server, which then verifies the signature.
